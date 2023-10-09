@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Welcome <%= user.username %> to the Dashboard</h1>
+    
+    <!-- Display the list of blog posts -->
+    <% if (blogPosts && blogPosts.length > 0) { %>
+        <h2>Your Blog Posts:</h2>
+        <ul>
+            <% blogPosts.forEach((post) => { %>
+                <li>
+                    <h3><%= post.title %></h3>
+                    <p><%= post.content %></p>
+                    <img src="<%= post.image %>" alt="">
+                </li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p>You have no blog posts yet.</p>
+    <% } %>
+
+    <!-- Add a new blog post form -->
+<h2>Add a New Blog Post:</h2>
+<form method="post" action="/add-post" enctype="multipart/form-data">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" required><br>
+    <label for="content">Content:</label>
+    <textarea id="content" name="content" required></textarea><br>
+    
+    <!-- Add a file input for image upload -->
+    <label for="image">Image:</label>
+    <input type="file" id="image" name="image"><br>
+    
+    <button type="submit">Create Post</button>
+</form>
+
+
+    <!-- Logout button -->
+    <a href="/logout">Logout</a>
+    
+</body>
+</html>
